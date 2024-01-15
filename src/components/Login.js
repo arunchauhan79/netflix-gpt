@@ -3,12 +3,11 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 import Header from './Header'
 import { checkValidData } from '../utils/validation'
 import { auth } from '../utils/firebase'
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { PROFILE_PHOTO } from '../utils/constants'
 
 const Login = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [isSignInForm, setIsSignInForm] = useState(true);
     const [errorMsg, setErrorMsg] = useState("")
@@ -41,12 +40,11 @@ const Login = () => {
                         // Signed up 
                         const user = userCredential.user;
                         updateProfile(user, {
-                            displayName: nameVal, photoURL: "https://i.pravatar.cc/150?img=59"
+                            displayName: nameVal, photoURL: { PROFILE_PHOTO }
                         }).then(() => {
                             const { uid, email, displayName, photoURL } = auth.currentUser;
                             dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL }));
 
-                            navigate('/browse');
                         }).catch((error) => {
                             setErrorMsg(error.message)
                         });
@@ -63,7 +61,6 @@ const Login = () => {
                     .then((userCredential) => {
                         // Signed in 
                         const user = userCredential.user;
-                        navigate('/browse');
 
                         // ...
                     })
