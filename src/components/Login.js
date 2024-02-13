@@ -5,7 +5,7 @@ import { checkValidData } from '../utils/validation'
 import { auth } from '../utils/firebase'
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
-import { PROFILE_PHOTO } from '../utils/constants'
+import { BG_URL, PROFILE_PHOTO } from '../utils/constants'
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -78,7 +78,7 @@ const Login = () => {
         <div>
             <Header />
             <div>
-                <img className='absolute' src='https://assets.nflxext.com/ffe/siteui/vlv3/c38a2d52-138e-48a3-ab68-36787ece46b3/eeb03fc9-99c6-438e-824d-32917ce55783/IN-en-20240101-popsignuptwoweeks-perspective_alpha_website_large.jpg'
+                <img className='absolute' src={BG_URL}
                     alt='background-image' />
             </div>
             <form onSubmit={(e) => e.preventDefault()} className='w-3/12 absolute p-12 bg-black m-36 mx-auto right-0 left-0 text-white opacity-85 rounded-md'>
